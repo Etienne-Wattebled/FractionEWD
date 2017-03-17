@@ -31,4 +31,12 @@ public class MultiplyTest {
 		assertEquals(6,r.getNominator());
 		assertEquals(25,r.getDenominator());
 	}
+	
+	@Test
+	public void testMultiply4() {
+		Fraction f = new Fraction(6,4);
+		Fraction r = f.multiply(3);
+		assertEquals(18,r.getNominator());
+		assertEquals(4,f.getDenominator());
+	}
 }

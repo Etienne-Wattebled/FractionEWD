@@ -31,4 +31,12 @@ public class AddTest {
 		assertEquals(-25,r.getNominator());
 		assertEquals(6,r.getDenominator());
 	}
+	
+	@Test
+	public void testAdd4() {
+		Fraction f = new Fraction(14,3);
+		Fraction r = f.add(8);
+		assertEquals(38,r.getNominator());
+		assertEquals(3,r.getDenominator());
+	}
 }

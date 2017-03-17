@@ -31,4 +31,12 @@ public class DivideTest {
 		assertEquals(18,r.getNominator());
 		assertEquals(-15,r.getDenominator());
 	}
+	
+	@Test
+	public void testDivide4() {
+		Fraction f = new Fraction(3,5);
+		Fraction r = f.divide(-3);
+		assertEquals(3,r.getNominator());
+		assertEquals(-15,r.getDenominator());
+	}
 }
