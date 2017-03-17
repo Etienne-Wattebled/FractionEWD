@@ -1,7 +1,9 @@
 package fr.etienne.wattebled.fraction;
 
 import fr.etienne.wattebled.fraction.exception.DivideByZeroFractionException;
+import fr.etienne.wattebled.fraction.exception.FractionException;
 import fr.etienne.wattebled.fraction.exception.ParseFractionException;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 
@@ -118,19 +120,29 @@ public class Fraction {
 	 * s can be
 	 * - A number like 30
 	 * - A fraction with '/' separator like 10/43
+	 * Values (numerator and denominator) should be long
 	 * @throws ParseFractionException and DivideByZeroException
 	 */
 	public void setValue(String s) {
-		String tab[] = s.split("/");
-		if (tab.length > 2) {
-			throw new ParseFractionException("The fraction couldn't contain more than two '/' separators.");
-		}
-		setNominator(Integer.parseInt(tab[0]));
-		
-		if (tab.length == 1) {
-			setDenominator(1);
-		} else  {
-			setDenominator(Integer.parseInt(tab[1]));
+		try {
+			if (StringUtils.isEmpty(s)) {
+				setNominator(0);
+				setDenominator(1);
+				return;
+			}
+			String tab[] = s.split("/");
+			if (tab.length > 2) {
+				throw new ParseFractionException("The fraction couldn't contain more than two '/' separators.");
+			}
+			setNominator(Integer.parseInt(tab[0]));
+			
+			if (tab.length == 1) {
+				setDenominator(1);
+			} else  {
+				setDenominator(Integer.parseInt(tab[1]));
+			}
+		} catch (NumberFormatException nfe) {
+			throw new ParseFractionException("All values should be numeric (and only one slash is allowed).");
 		}
 	}
 	
