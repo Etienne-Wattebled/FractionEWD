@@ -1,7 +1,6 @@
 package fr.etienne.wattebled.fraction;
 
 import fr.etienne.wattebled.fraction.exception.DivideByZeroFractionException;
-import fr.etienne.wattebled.fraction.exception.FractionException;
 import fr.etienne.wattebled.fraction.exception.ParseFractionException;
 import org.apache.commons.lang3.StringUtils;
 
@@ -299,13 +298,38 @@ public class Fraction {
 	public Fraction pow(long p) {
 		Fraction f = new Fraction(this);
 		if (p<0) {
-			long b = f.getNominator();
-			f.setNominator(f.getDenominator());
-			f.setDenominator(b);
+			f.inverse();
 			p = -p;
 		}
-		f.setNominator((long)Math.pow(getNominator(),p));
-		f.setDenominator((long)Math.pow(getDenominator(),p));
+		f.setNominator((long)(Math.pow(f.getNominator(),p)));
+		f.setDenominator((long)(Math.pow(f.getDenominator(),p)));
+		return f;
+	}
+	
+	public Fraction powNominator(long p) {
+		Fraction f = new Fraction(this);
+		boolean neg = p<0;
+		p = Math.abs(p);
+		long pow = (long)(Math.pow(f.getNominator(),p));
+		if (neg) {
+			f.setDenominator(f.getDenominator()*pow);
+			f.setNominator(1);
+		} else {
+			f.setNominator(pow);
+		}
+		return f;
+	}
+	public Fraction powDenominator(long p) {
+		Fraction f = new Fraction(this);
+		boolean neg = p<0;
+		p = Math.abs(p);
+		long pow = (long)(Math.pow(f.getDenominator(),p));
+		if (neg) {
+			f.setNominator(f.getNominator()*pow);
+			f.setDenominator(1);
+		} else {
+			f.setDenominator(pow);
+		}
 		return f;
 	}
 	
