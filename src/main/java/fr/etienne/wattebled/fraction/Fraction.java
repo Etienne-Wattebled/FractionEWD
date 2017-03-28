@@ -294,6 +294,14 @@ public class Fraction {
 		setNominator(getDenominator());
 		setDenominator(prov);
 	}
+	/**
+	 * Get a new fraction corresponding to the inverse
+	 */
+	public Fraction getInverse() {
+		Fraction f = new Fraction(this);
+		f.inverse();
+		return f;
+	}
 	
 	public Fraction pow(long p) {
 		Fraction f = new Fraction(this);
